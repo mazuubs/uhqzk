@@ -71,7 +71,10 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 (async () => {
   try {
     console.log('🔄 Enregistrement des commandes slash...');
-    await rest.put(Routes.applicationCommands(process.env.DISCORD_CLIENT_ID), { body: commands });
+    await rest.put(
+      Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID, process.env.DISCORD_GUILD_ID),
+      { body: commands }
+    );
     console.log('✅ Commandes enregistrées avec succès !');
   } catch (error) {
     console.error('❌ Erreur :', error);
